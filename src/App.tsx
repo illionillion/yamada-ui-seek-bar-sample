@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FC } from "react"
 import { Layout } from "./components/layouts"
-import { Heading, IconButton, Slider, useBoolean } from "@yamada-ui/react"
+import { Heading, IconButton, Slider, Text, useBoolean } from "@yamada-ui/react"
 import { PauseIcon, PlayIcon } from "@yamada-ui/lucide"
 
 const App: FC = () => {
@@ -18,9 +18,9 @@ const App: FC = () => {
         setValue(0)
         end()
       } else {
-        setValue((prev) => prev + 1)
+        setValue((prev) => Math.min(prev + 0.025, 100)) // 0.025ごとに増やす
       }
-    }, 1000)
+    }, 25)
     setTimerId(timerId)
   }
 
@@ -37,6 +37,7 @@ const App: FC = () => {
 
   return <Layout>
     <Heading>seek bar</Heading>
+    <Text>{Math.floor(value)}/100秒</Text>
     <Slider value={value} onChange={setValue} min={0} max={100}
       thumbProps={{
         visibility: "hidden",
