@@ -27,7 +27,6 @@ const App: FC = () => {
   const handleStop = () => {
     if (!playing) return
     clearInterval(timerId!)
-    // setValue(0)
     end()
   }
 
@@ -39,25 +38,8 @@ const App: FC = () => {
     <Heading>seek bar</Heading>
     <Text>{Math.floor(value)}/100秒</Text>
     <Slider value={value} onChange={setValue} min={0} max={100}
-      thumbProps={{
-        visibility: "hidden",
-        _after: {
-          content: '""',
-          display: "block",
-          w: "4",
-          h: "4",
-          borderRadius: "full",
-          bg: "white",
-          border: "1px solid",
-          bordercolor: "gray.300",
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          left: `${value}%`,
-          transition: "left 0",
-          visibility: "visible",
-        }
-      }}
+      focusThumbOnChange={false}
+      readOnly={false}
     />
     <IconButton icon={playing ? <PauseIcon /> : <PlayIcon />} onClick={playing ? handleStop : handlePlay} />
   </Layout>
